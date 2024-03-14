@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 
 class keoBuaBao {
+   static Scanner input = new Scanner(System.in);
     String getComputerChoice() {
         String computerChoice;
 
@@ -20,10 +21,17 @@ class keoBuaBao {
     }
 
     String getUserInput() {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Vui long chon Keo, Bua hoac Bao");
-        String userInput = input.nextLine();
-        userInput = userInput.toLowerCase();
+        String userInput;
+        while(true)
+        {
+            System.out.println("Vui long chon Keo, Bua hoac Bao");
+            userInput = input.nextLine();
+            userInput = userInput.toLowerCase();
+            if(userInput.equals("keo") || userInput.equals("bua") || userInput.equals("bao") )
+            {
+                break;
+            }
+        }
         return userInput;
     }
     String result(String user, String computer)
@@ -43,22 +51,24 @@ class keoBuaBao {
         } else 
         return "lose";
     }
+
     public static void main(String[] args) {
         keoBuaBao object = new keoBuaBao();
-
-        String userInput;
-        while(true)
+        while (true)
         {
-            userInput = object.getUserInput();
-            if(userInput.equals("keo") || userInput.equals("bua") || userInput.equals("bao") )
-            {
-                break;
-            }
-        }
+        String userInput = object.getUserInput();
         String computerChoice = object.getComputerChoice();
         String result = object.result(userInput, computerChoice);
         System.out.println("User choice: " + userInput);
         System.out.println("Computer choice: " + computerChoice);
         System.out.println("Nguoi choi : " + result);
+
+        System.out.println("Do u want to play again?? y/n");
+        String playAgain = input.next();
+        if(!(playAgain.equals("y")))
+        {
+            break;
+        }
+        }
     }
 }
